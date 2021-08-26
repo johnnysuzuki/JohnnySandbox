@@ -6,7 +6,8 @@ public class playermanager : MonoBehaviour
     [SerializeField] LayerMask blockLayer;
     [SerializeField] GameManager gameManager;
     public float dashwait;
-    public bool OnGround { get; set; }
+    [SerializeField] IsGroundChecker ground;
+
 
     //　方向の列挙
     public enum DIRECTION_TYPE 
@@ -14,49 +15,6 @@ public class playermanager : MonoBehaviour
         STOP,
         RIGHT,
         LEFT,
-    }
-
-    IEnumerator Dash()
-    {
-        if (!isDead)
-        {
-            if(dwait == true)
-            {
-                dflug = true;
-                float dspeed;
-                if (transform.localScale.x == 1)
-                {
-                    dspeed = 3f;
-                }
-                else
-                {
-                    dspeed = -3f;
-                }
-                dspeed = dspeed * 10f;
-                int dashsecond = 0;
-                while (dashsecond < 20)
-                {
-                    Debug.Log(dashsecond);
-                    dashsecond++;
-                    rigidbody2d.velocity = new Vector2(dspeed, 0);
-                    yield return null;
-                }
-                dflug = false;
-                dwait = false;
-                StartCoroutine(Dashwait());
-
-
-            }
-
-
-        }
-    }
-
-    IEnumerator Dashwait()
-    {
-        yield return new WaitForSeconds(dashwait);
-        dwait = true;
-
     }
 
     //初期方向
@@ -69,18 +27,22 @@ public class playermanager : MonoBehaviour
     //アニメーターコンポーネント
     Animator animator;
     //ジャンプ可能回数
-    float jumpn;
-    
+    int MaxJumpCount;
+    //　ジャンプ中かどうか
+    private bool isJump = false;
+    //現在のジャンプ回数
+    private int JumpCount = 0;
+
     float jumppower = 400;
     //生死判定
     bool isDead = false;
 
-    //ダブルジャンプ可能かどうか
-    bool canjump = false;
     //ダッシュ可能かどうか
     bool dflug = false;
     //ダッシュを待つための関数
     bool dwait = true;
+    //　設置判定を見る関数
+    private bool isGround = false;
     
 
     //rigidbody2dを取得する
@@ -88,7 +50,7 @@ public class playermanager : MonoBehaviour
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        jumpn = 0;
+        MaxJumpCount = 0;
     }
 
     private void Update()
@@ -97,6 +59,9 @@ public class playermanager : MonoBehaviour
         {
             return;
         }
+
+        //設置判定を得る
+        isGround = ground.IsGround();
 
         //左右入力に応じて-1,0,1のどれかを取る関数xを作る
         float x = Input.GetAxisRaw("Horizontal");
@@ -118,46 +83,19 @@ public class playermanager : MonoBehaviour
             direction = DIRECTION_TYPE.LEFT;
         }
 
-
-        //ダブルジャンプ不可能である場合
-        if (canjump == false)
+        if (isGround)
         {
-            if (IsGround())
-            {
-                if (Input.GetButtonDown("Jump"))
-                {
-                    Jump();
-                }
-                else
-                {
-                    animator.SetBool("Isjumping", false);
-                }
-            }
-
+            JumpCount = 0;
+            animator.SetBool("Isjumping", false);
         }
-        else
+
+        if(JumpCount <= MaxJumpCount && Input.GetButtonDown("Jump"))
         {
-
-            //ジャンプ回数のリセットと追加
-            if (IsGround() && jumpn < 1)
-            {
-                jumpn = 1;
-            }
-
-            // スペースが押されたらJUMPさせる
-            if (jumpn >= 1 && Input.GetButtonDown("Jump"))
-            {
-                jumpn = jumpn - 1;
-                Jump();
-            }
-
-            //接地時アニメーションをキャンセルする
-            if (IsGround())
-            {
-                animator.SetBool("Isjumping", false);
-            }
-
+            isJump = true;
+            Jump();
         }
+
+
 
         if (Input.GetKeyDown("q"))
         {
@@ -216,24 +154,19 @@ public class playermanager : MonoBehaviour
 
     void Jump()
     {
-        //一旦上下の速度を0にする
-        rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x,0);
-        //上に力を加える
-        rigidbody2d.AddForce(Vector2.up * jumppower);
-        animator.SetBool("Isjumping",true);
+        if (isJump)
+        {
+            animator.SetBool("Isjumping", false);
+            //一旦上下の速度を0にする
+            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, 0);
+            //上に力を加える
+            rigidbody2d.AddForce(Vector2.up * jumppower);
+            animator.SetBool("Isjumping", true);
+            JumpCount++;
+            isJump = false;
+        }
     }
     
-    //地面と接触しているかどうかを判定する関数
-    bool IsGround()
-    {
-        // 始点と終点を作成
-        Vector3 leftStartPoint = transform.position - Vector3.right * 0.2f;
-        Vector3 RightStartPoint = transform.position + Vector3.right * 0.2f;
-        Vector3 endPoint = transform.position - Vector3.up * 0.1f;
-        return Physics2D.Linecast(leftStartPoint, endPoint, blockLayer)
-            || Physics2D.Linecast(RightStartPoint, endPoint, blockLayer);
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
@@ -284,7 +217,7 @@ public class playermanager : MonoBehaviour
         if(collision.gameObject.tag == "Gem")
         {
             collision.gameObject.GetComponent<itemManager>().GetGem();
-            canjump = true;
+            MaxJumpCount ++;
         }
 
 
@@ -302,5 +235,44 @@ public class playermanager : MonoBehaviour
 
     }
 
+
+    IEnumerator Dash()
+    {
+        if (!isDead)
+        {
+            if (dwait == true)
+            {
+                dflug = true;
+                float dspeed;
+                if (transform.localScale.x == 1)
+                {
+                    dspeed = 3f;
+                }
+                else
+                {
+                    dspeed = -3f;
+                }
+                dspeed = dspeed * 10f;
+                int dashsecond = 0;
+                while (dashsecond < 20)
+                {
+                    Debug.Log(dashsecond);
+                    dashsecond++;
+                    rigidbody2d.velocity = new Vector2(dspeed, 0);
+                    yield return null;
+                }
+                dflug = false;
+                dwait = false;
+                StartCoroutine(Dashwait());
+            }
+
+        }
+    }
+
+    IEnumerator Dashwait()
+    {
+        yield return new WaitForSeconds(dashwait);
+        dwait = true;
+    }
 
 }
