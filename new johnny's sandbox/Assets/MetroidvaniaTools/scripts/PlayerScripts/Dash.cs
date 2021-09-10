@@ -58,12 +58,12 @@ namespace MetroidvaniaTools
                 if (!character.isFacingLeft)
                 {
                     DashCollision(Vector2.right,.5f,DashingLayers);
-                    rb.AddForce(Vector2.right * DashForce);
+                    rb.velocity = new Vector2(DashForce,0);
                 }
                 else
                 {
                     DashCollision(Vector2.left, .5f, DashingLayers);
-                    rb.AddForce(Vector2.left * DashForce);
+                    rb.velocity = new Vector2(-DashForce, 0);
                 }
             }
         }

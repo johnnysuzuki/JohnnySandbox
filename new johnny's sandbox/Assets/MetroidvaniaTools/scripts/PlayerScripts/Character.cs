@@ -13,6 +13,10 @@ namespace MetroidvaniaTools
         public bool isGrounded;
         [HideInInspector]
         public bool isDashing;
+        [HideInInspector]
+        public bool isWallSliding;
+
+        public static float gravity = -9.81f;
 
         protected Collider2D col;
         protected Rigidbody2D rb;
@@ -63,15 +67,27 @@ namespace MetroidvaniaTools
         {
             RaycastHit2D[] hits = new RaycastHit2D[10];
             int numHits = col.Cast(direction, hits, distance);
-            for(int i = 0; i < numHits; i++)
+            for (int i = 0; i < numHits; i++)
             {
-                if((1<<hits[i].collider.gameObject.layer & collision) != 0)
+                if ((1 << hits[i].collider.gameObject.layer & collision) != 0)
                 {
                     return true;
                 }
             }
             return false;
         }
+
+        protected virtual bool SideCheck(float distance,LayerMask collision)//向いてる方向の当たり判定を探す
+        {
+            if (!isFacingLeft && CollisionCheck(Vector2.right, distance, collision) || isFacingLeft && CollisionCheck(Vector2.left,distance,collision))
+            {
+                return true;
+            }
+            else
+                return false;
+
+        }
+
 
         protected virtual bool Falling(float velocity)
         {
