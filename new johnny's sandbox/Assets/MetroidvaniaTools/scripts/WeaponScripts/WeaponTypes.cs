@@ -7,8 +7,8 @@ namespace MetroidvaniaTools
     [CreateAssetMenu(fileName = "WeaponType",menuName ="Metroidvania/Weapons",order = 1)]
     public class WeaponTypes : ScriptableObject
     {
-        public GameObject Projectile;
-        public float ProjectileSpeed;
-
+        public GameObject projectile;
+        public float projectileSpeed;
+        public int amountToPool;
     }
 }

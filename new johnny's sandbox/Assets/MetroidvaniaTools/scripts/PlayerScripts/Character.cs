@@ -22,6 +22,7 @@ namespace MetroidvaniaTools
         protected Rigidbody2D rb;
         protected Horizontalmovement movement;
         protected Jump jump;
+        protected ObjectPooler objectPooler;
 
         private Vector2 facingLeft;
 
@@ -37,7 +38,8 @@ namespace MetroidvaniaTools
             col = GetComponent<Collider2D>();
             rb = GetComponent<Rigidbody2D>();
             movement = GetComponent<Horizontalmovement>();
-            jump = GetComponent<Jump>();
+            jump = GetComponent<Jump>(); 
+            objectPooler = ObjectPooler.Instance;
             facingLeft = new Vector2(-transform.localScale.x,transform.localScale.y);
         }
 

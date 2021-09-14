@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df7736a0b6944a4a9e1c8b3d2b8066b, type: 3}
   m_Name: BaseProjectile
   m_EditorClassIdentifier: 
-  Projectile: {fileID: 5215618507970645572, guid: 525ee618556ac3e429f1b95a5d67e88a,
+  projectile: {fileID: 5215618507970645572, guid: 525ee618556ac3e429f1b95a5d67e88a,
     type: 3}
-  ProjectileSpeed: 20
+  projectileSpeed: 20
+  amountToPool: 20
