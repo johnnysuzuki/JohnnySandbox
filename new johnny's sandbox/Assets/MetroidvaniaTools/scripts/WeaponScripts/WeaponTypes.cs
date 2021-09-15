@@ -10,5 +10,6 @@ namespace MetroidvaniaTools
         public GameObject projectile;
         public float projectileSpeed;
         public int amountToPool;
+        public float lifeTime;
     }
 }

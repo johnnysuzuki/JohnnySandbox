@@ -16,3 +16,4 @@ MonoBehaviour:
     type: 3}
   projectileSpeed: 20
   amountToPool: 20
+  lifeTime: 2
