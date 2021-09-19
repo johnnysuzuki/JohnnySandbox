@@ -6,6 +6,7 @@ namespace MetroidvaniaTools
 {
     public class Weapon : Abilities
     {
+        [Header("ウェポンに関するデータを格納")]
         [SerializeField]
         protected List<WeaponTypes> weaponTypes;
         [SerializeField]
@@ -18,6 +19,7 @@ namespace MetroidvaniaTools
         public WeaponTypes currentWeapon;
 
         private GameObject projectileParentFolder;
+        private float currentTimeBetweenShots;
 
 
         protected virtual void Update()
@@ -30,12 +32,22 @@ namespace MetroidvaniaTools
 
         protected virtual void FixedUpdate()
         {
-            PointGun();
+            FireWeaponHeld();
         }
 
         protected virtual bool WeaponFired()
         {
             if (Input.GetButtonDown("Fire1"))
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        protected virtual bool WeaponFiredHeld()
+        {
+            if (Input.GetButton("Fire1"))
             {
                 return true;
             }
@@ -62,15 +74,29 @@ namespace MetroidvaniaTools
             {
                 Invoke("PlaceProjectile", .1f);
             }
+            currentTimeBetweenShots = currentWeapon.timeBetweenShots;
         }
 
-        protected virtual void PointGun()
+        protected virtual void FireWeaponHeld()
         {
-            if (!character.isFacingLeft)
+            if (WeaponFiredHeld())
             {
-
+                if (currentWeapon.automatic)
+                {
+                    currentTimeBetweenShots -= Time.deltaTime;
+                    if(currentTimeBetweenShots < 0)
+                    {
+                        currentProjectile = objectPooler.GetObject(currentPool);
+                        if (currentProjectile != null)
+                        {
+                            Invoke("PlaceProjectile", .1f);
+                        }
+                        currentTimeBetweenShots = currentWeapon.timeBetweenShots;
+                    }
+                }
             }
         }
+
 
 
         protected virtual void PlaceProjectile()

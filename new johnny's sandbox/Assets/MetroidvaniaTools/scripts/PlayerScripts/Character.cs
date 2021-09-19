@@ -36,10 +36,6 @@ namespace MetroidvaniaTools
         }
         private void Update()
         {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                Debug.Log(aimManager.fromOriginToAim);
-            }
         }
 
         protected virtual void Initialization()

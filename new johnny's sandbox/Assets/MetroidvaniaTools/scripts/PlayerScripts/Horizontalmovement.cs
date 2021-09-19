@@ -77,29 +77,18 @@ namespace MetroidvaniaTools
             rb.velocity = new Vector2(currentSpeed, rb.velocity.y);
         }
 
+        //スピードが速くなりすぎないようにする
         protected virtual void SpeedControl()
         {
             if (currentSpeed > 0)
-            {/*
-                if (character.isFacingLeft)
-                {
-                    character.isFacingLeft = false;
-                    Flip();
-                }
-                */
+            {
                 if (currentSpeed > MaxSpeed)
                 {
                     currentSpeed = MaxSpeed;
                 }
             }
             if (currentSpeed < 0)
-            {/*
-                if (!character.isFacingLeft)
-                {
-                    character.isFacingLeft = true;
-                    Flip();
-                }
-                */
+            {
                 if (currentSpeed < -MaxSpeed)
                 {
                     currentSpeed = -MaxSpeed;
@@ -107,6 +96,7 @@ namespace MetroidvaniaTools
             }
         }
 
+        //ダッシュ時は速度を係数分だけ乗算する
         protected virtual void SpeedMultiplier()
         {
             if (SprintingHeld())

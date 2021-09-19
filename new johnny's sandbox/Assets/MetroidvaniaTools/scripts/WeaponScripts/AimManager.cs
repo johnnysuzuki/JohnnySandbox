@@ -42,6 +42,7 @@ namespace MetroidvaniaTools
             }
         }
 
+        //マウスの位置によってキャラクターの向きを変更する
         protected virtual void CheckDirection()
         {
             if (fromOriginToAim.x > 0)
