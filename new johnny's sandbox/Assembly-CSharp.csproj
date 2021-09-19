@@ -64,6 +64,7 @@
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Dash.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Horizontalmovement.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Jump.cs" />
+    <Compile Include="Assets\MetroidvaniaTools\scripts\WeaponScripts\AimManager.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\WeaponScripts\ObjectPooler.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\WeaponScripts\Projectile.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\WeaponScripts\Weapon.cs" />

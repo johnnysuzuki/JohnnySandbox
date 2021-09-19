@@ -23,6 +23,8 @@ namespace MetroidvaniaTools
         protected Horizontalmovement movement;
         protected Jump jump;
         protected ObjectPooler objectPooler;
+        protected AimManager aimManager;
+        protected Weapon weapon;
 
         private Vector2 facingLeft;
 
@@ -32,6 +34,13 @@ namespace MetroidvaniaTools
             Initialization();
 
         }
+        private void Update()
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Debug.Log(aimManager.fromOriginToAim);
+            }
+        }
 
         protected virtual void Initialization()
         {
@@ -40,16 +49,9 @@ namespace MetroidvaniaTools
             movement = GetComponent<Horizontalmovement>();
             jump = GetComponent<Jump>(); 
             objectPooler = ObjectPooler.Instance;
+            aimManager = GetComponent<AimManager>();
+            weapon = GetComponent<Weapon>();
             facingLeft = new Vector2(-transform.localScale.x,transform.localScale.y);
-        }
-
-        public void DebugLogString(string something)
-        {
-            Debug.Log(something);
-        }
-        public void DebugLogFloat(float something)
-        {
-            Debug.Log(something);
         }
 
         protected virtual void Flip()

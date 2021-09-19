@@ -65,7 +65,7 @@ namespace MetroidvaniaTools
                 acceleration = MaxSpeed / timeTillMaxSpeed;
                 runTime += Time.deltaTime;
                 currentSpeed = horizontalInput * acceleration * runTime;
-                CheckDirection();
+                SpeedControl();
             }
             else
             {
@@ -77,27 +77,29 @@ namespace MetroidvaniaTools
             rb.velocity = new Vector2(currentSpeed, rb.velocity.y);
         }
 
-        protected virtual void CheckDirection()
+        protected virtual void SpeedControl()
         {
             if (currentSpeed > 0)
-            {
+            {/*
                 if (character.isFacingLeft)
                 {
                     character.isFacingLeft = false;
                     Flip();
                 }
+                */
                 if (currentSpeed > MaxSpeed)
                 {
                     currentSpeed = MaxSpeed;
                 }
             }
             if (currentSpeed < 0)
-            {
+            {/*
                 if (!character.isFacingLeft)
                 {
                     character.isFacingLeft = true;
                     Flip();
                 }
+                */
                 if (currentSpeed < -MaxSpeed)
                 {
                     currentSpeed = -MaxSpeed;

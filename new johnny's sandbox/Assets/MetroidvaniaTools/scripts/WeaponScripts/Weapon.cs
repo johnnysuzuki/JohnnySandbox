@@ -15,6 +15,7 @@ namespace MetroidvaniaTools
 
         public List<GameObject> currentPool = new List<GameObject>();
         public GameObject currentProjectile;
+        public WeaponTypes currentWeapon;
 
         private GameObject projectileParentFolder;
 
@@ -27,6 +28,11 @@ namespace MetroidvaniaTools
             }
         }
 
+        protected virtual void FixedUpdate()
+        {
+            PointGun();
+        }
+
         protected virtual bool WeaponFired()
         {
             if (Input.GetButtonDown("Fire1"))
@@ -35,7 +41,6 @@ namespace MetroidvaniaTools
             }
             else
                 return false;
-
         }
 
         protected override void Initialization()
@@ -47,6 +52,7 @@ namespace MetroidvaniaTools
                 projectileParentFolder = newPool;
                 objectPooler.CreatePool(weapon,currentPool,projectileParentFolder);
             }
+            currentWeapon = weaponTypes[0];
         }
 
         protected virtual void FireWeapon()
@@ -57,6 +63,15 @@ namespace MetroidvaniaTools
                 Invoke("PlaceProjectile", .1f);
             }
         }
+
+        protected virtual void PointGun()
+        {
+            if (!character.isFacingLeft)
+            {
+
+            }
+        }
+
 
         protected virtual void PlaceProjectile()
         {
