@@ -34,8 +34,9 @@ namespace MetroidvaniaTools
         }
 
         private GameObject currentItems;
-        public void CreatePool(WeaponTypes weapon, List<GameObject> currentPool, GameObject projectileParentFolder)
+        public void CreatePool(WeaponTypes weapon, List<GameObject> currentPool, GameObject projectileParentFolder,Weapon weaponScript)
         {
+            weaponScript.totalPools.Add(projectileParentFolder);
             for(int i=0; i < weapon.amountToPool; i++)
             {
                 currentItems = Instantiate(weapon.projectile);
@@ -44,15 +45,40 @@ namespace MetroidvaniaTools
                 currentItems.transform.SetParent(projectileParentFolder.transform);
             }
             projectileParentFolder.name = weapon.name;
+            projectileParentFolder.tag = weapon.projectile.tag;
         }
 
-        public virtual GameObject GetObject(List<GameObject> currentPool)
+        public virtual GameObject GetObject(List<GameObject> currentPool, WeaponTypes weapon, Weapon weaponScript,GameObject projectileParentFolder, string tag)
         {
             for(int i = 0; i < currentPool.Count; i++)
             {
-                if (!currentPool[i].activeInHierarchy)
+                if (!currentPool[i].activeInHierarchy && currentPool[i].tag == tag)
                 {
+                    if(weapon.canResetPool && weaponScript.bulletToReset.Count < weapon.amountToPool)
+                    {
+                        weaponScript.bulletToReset.Add(currentPool[i]);
+                    }
                     return currentPool[i];
+                }
+            }
+            foreach (GameObject item in currentPool)
+            {
+                if (weapon.canExpandPool && item.tag == tag)
+                {
+                    currentItems = Instantiate(weapon.projectile);
+                    currentItems.SetActive(false);
+                    currentPool.Add(currentItems);
+                    currentItems.transform.SetParent(projectileParentFolder.transform);
+                    return currentItems;
+                }
+                if (weapon.canResetPool && item.tag == tag)
+                {
+                    currentItems = weaponScript.bulletToReset[0];
+                    weaponScript.bulletToReset.RemoveAt(0);
+                    currentItems.SetActive(false);
+                    weaponScript.bulletToReset.Add(currentItems);
+                    currentItems.GetComponent<Projectile>().DestroyProjectile();
+                    return currentItems;
                 }
             }
             return null;

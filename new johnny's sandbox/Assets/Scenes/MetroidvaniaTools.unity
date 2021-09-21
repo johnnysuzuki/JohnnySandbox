@@ -800,9 +800,12 @@ MonoBehaviour:
   isWallSliding: 0
   weaponTypes:
   - {fileID: 11400000, guid: 450425a99d974ce4f809e1c48e452f9e, type: 2}
+  - {fileID: 11400000, guid: dacb469d175e021419afc96c95ee2c40, type: 2}
   gunBarrel: {fileID: 1719634967}
   gunRotation: {fileID: 1837756306}
   currentPool: []
+  bulletToReset: []
+  totalPools: []
   currentProjectile: {fileID: 0}
   currentWeapon: {fileID: 0}
 --- !u!114 &912387312

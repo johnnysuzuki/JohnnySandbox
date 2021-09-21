@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1df7736a0b6944a4a9e1c8b3d2b8066b, type: 3}
-  m_Name: BaseProjectile
+  m_Name: SecondWeapon
   m_EditorClassIdentifier: 
-  projectile: {fileID: 5215618507970645572, guid: 525ee618556ac3e429f1b95a5d67e88a,
+  projectile: {fileID: 762540255050756601, guid: 2a7eeae2c1d89124389bff8273636fc4,
     type: 3}
-  projectileSpeed: 5
-  amountToPool: 4
-  lifeTime: 0.5
+  projectileSpeed: 10
+  amountToPool: 20
+  lifeTime: 1
   automatic: 1
   timeBetweenShots: 0.2
   canExpandPool: 1
