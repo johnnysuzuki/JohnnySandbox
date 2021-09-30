@@ -13,6 +13,8 @@ namespace MetroidvaniaTools
         protected float MaxSpeed;//最高速
         [SerializeField]
         protected float SprintMultiplier;
+        [SerializeField]
+        protected float hookSpeedMultiplier;
         private float acceleration;//加速度
         private float currentSpeed;//現在の速度
         private float horizontalInput;//左右入力
@@ -55,6 +57,7 @@ namespace MetroidvaniaTools
         protected virtual void FixedUpdate()
         {
             Movement();
+            RemoveFromGrapple();
         }
 
         //移動の処理
@@ -75,6 +78,19 @@ namespace MetroidvaniaTools
             }
             SpeedMultiplier();
             rb.velocity = new Vector2(currentSpeed, rb.velocity.y);
+        }
+
+        protected virtual void RemoveFromGrapple()
+        {
+            if (grapplingHook.removed)
+            {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.identity, Time.deltaTime * 500);
+                if(transform.rotation == Quaternion.identity)
+                {
+                    grapplingHook.removed = false;
+                    rb.freezeRotation = true;
+                }
+            }
         }
 
         //スピードが速くなりすぎないようにする
@@ -102,6 +118,20 @@ namespace MetroidvaniaTools
             if (SprintingHeld())
             {
                 currentSpeed *= SprintMultiplier;
+            }
+            if (grapplingHook.connected)
+            {
+                
+                if(Input.GetButton("Up")|| Input.GetButton("Down") || AroundCollisionCheck() || character.isGrounded )
+                {
+                    return;
+                }
+                currentSpeed *= hookSpeedMultiplier;
+                if(grapplingHook.hookTrail.transform.position.y > grapplingHook.objectConnectedTo.transform.position.y)
+                {
+                    currentSpeed *= -hookSpeedMultiplier;
+                }
+                rb.rotation -= currentSpeed;
             }
         }
 

@@ -32,6 +32,12 @@ namespace MetroidvaniaTools
                 projectileLifeTime -= Time.deltaTime;
                 if(projectileLifeTime > 0)
                 {
+                    if(gameObject.tag == "GrapplingHook")
+                    {
+                        transform.parent = GameObject.FindWithTag("Player").transform;
+                        transform.Translate(Vector2.right * weapon.projectileSpeed * Time.deltaTime);
+                        return;
+                    }
                     if (!left)
                     {
                         if (flipped)

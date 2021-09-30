@@ -9,10 +9,8 @@ namespace MetroidvaniaTools
         [Header("ウェポンに関するデータを格納")]
         [SerializeField]
         protected List<WeaponTypes> weaponTypes;
-        [SerializeField]
-        protected Transform gunBarrel;
-        [SerializeField]
-        protected Transform gunRotation;
+        public Transform gunBarrel;
+        public Transform gunRotation;
 
         [HideInInspector]
         public List<GameObject> currentPool = new List<GameObject>();
@@ -147,9 +145,23 @@ namespace MetroidvaniaTools
                     matched = true;
                 }
             }
+            if(currentWeapon.projectile.tag == "GrapplingHook")
+            {
+                grapplingHook.enabled = true;
+            }
+            else
+            {
+                grapplingHook.removed = true;
+                grapplingHook.RemoveGrapple();
+                grapplingHook.enabled = false;
+            }
             if (!matched)
             {
                 NewPool();
+            }
+            if (currentWeapon.canResetPool)
+            {
+                bulletToReset.Clear();
             }
         }
 

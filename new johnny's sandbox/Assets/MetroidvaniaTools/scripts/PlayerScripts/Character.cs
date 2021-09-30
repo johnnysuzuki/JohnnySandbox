@@ -25,6 +25,7 @@ namespace MetroidvaniaTools
         protected ObjectPooler objectPooler;
         protected AimManager aimManager;
         protected Weapon weapon;
+        protected GrapplingHook grapplingHook;
 
         private Vector2 facingLeft;
 
@@ -36,6 +37,20 @@ namespace MetroidvaniaTools
         }
         private void Update()
         {
+            if(grapplingHook.checking == true)
+            {
+                Debug.Log("cheking");
+                grapplingHook.checking = false;
+                
+            }
+            if(grapplingHook.canDrawLine== true)
+            {
+                Debug.Log("canDrawLine");
+            }
+            if (grapplingHook.distanceFromHookedObject > 0)
+            {
+                Debug.Log(grapplingHook.distanceFromHookedObject);
+            }
         }
 
         protected virtual void Initialization()
@@ -48,6 +63,7 @@ namespace MetroidvaniaTools
             aimManager = GetComponent<AimManager>();
             weapon = GetComponent<Weapon>();
             facingLeft = new Vector2(-transform.localScale.x,transform.localScale.y);
+            grapplingHook = GetComponent<GrapplingHook>();
         }
 
         protected virtual void Flip()
@@ -75,6 +91,16 @@ namespace MetroidvaniaTools
                 }
             }
             return false;
+        }
+
+        protected virtual bool AroundCollisionCheck()
+        {
+            if (CollisionCheck(Vector2.right, .1f, jump.collisionLayer) || CollisionCheck(Vector2.left, .1f, jump.collisionLayer) || CollisionCheck(Vector2.down, .1f, jump.collisionLayer) || CollisionCheck(Vector2.up, .1f, jump.collisionLayer))
+            {
+                return true;
+            }
+            else
+                return false;
         }
 
         protected virtual bool SideCheck(float distance,LayerMask collision)//向いてる方向の当たり判定を探す

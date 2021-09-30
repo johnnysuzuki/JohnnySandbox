@@ -62,6 +62,8 @@
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Abilities.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Character.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Dash.cs" />
+    <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\GrapplingHook.cs" />
+    <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Hook.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Horizontalmovement.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Jump.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\WeaponScripts\AimManager.cs" />
