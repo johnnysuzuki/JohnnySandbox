@@ -9,6 +9,7 @@ namespace MetroidvaniaTools
 
         protected GameObject player;
         protected GrapplingHook grapplingHook;
+        protected Weapon weapon;
         [SerializeField]
         protected LayerMask layers;
 
@@ -16,6 +17,7 @@ namespace MetroidvaniaTools
         {
             player = GameObject.FindWithTag("Player");
             grapplingHook = player.GetComponent<GrapplingHook>();
+            weapon = player.GetComponent<Weapon>();
         }
 
         protected void OnTriggerEnter2D(Collider2D collision)
@@ -23,9 +25,9 @@ namespace MetroidvaniaTools
             if((1 << collision.gameObject.layer & layers) != 0 && !grapplingHook.connected)
             {
                 grapplingHook.connected = true;
-                grapplingHook.objectConnectedTo = collision.gameObject;
-                collision.GetComponent<HingeJoint2D>().enabled = true;
-                collision.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
+                grapplingHook.objectConnectedTo = weapon.currentProjectile.transform.position;
+                weapon.currentProjectile.GetComponent<HingeJoint2D>().enabled = true;
+                weapon.currentProjectile.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
             }
         }
 

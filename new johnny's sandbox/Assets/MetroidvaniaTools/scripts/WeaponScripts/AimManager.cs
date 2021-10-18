@@ -11,6 +11,7 @@ namespace MetroidvaniaTools
         public Vector2 mousePosition;
         public Vector2 fromOriginToAim;
 
+
         protected override void Initialization()
         {
             base.Initialization();
@@ -19,7 +20,10 @@ namespace MetroidvaniaTools
         protected virtual void Update()
         {
             AimPositionSetting();
-            CheckDirection();
+            if (!grapplingHook.grappling)
+            {
+                CheckDirection();
+            }
         }
         protected virtual void FixedUpdate()
         {
@@ -29,17 +33,28 @@ namespace MetroidvaniaTools
         {
             Vector2 mouse = Input.mousePosition;
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(mouse);//現在マウスの位置を取得
-            whereToAim.position = mousePosition;//狙う場所はマウスの座標と同じ場所
-            fromOriginToAim = whereToAim.position - origin.position;//狙う場所と原点の差分ベクトル
-            if (character.isFacingLeft)
+            if (!grapplingHook.grappling)
             {
-                origin.rotation = Quaternion.FromToRotation(Vector2.left, fromOriginToAim);//差分ベクトルから角度を出す。
+                whereToAim.position = mousePosition;//狙う場所はマウスの座標と同じ場所
             }
-            else
+            if (weapon.currentProjectile != null &&  weapon.currentProjectile.activeSelf && weapon.currentProjectile.tag == "GrapplingHook")
+             //グラップルフックが発射された時
             {
-                origin.rotation = Quaternion.FromToRotation(Vector2.right, fromOriginToAim);//差分ベクトルから角度を出す。
+                whereToAim.position = weapon.currentProjectile.transform.position;
+            }
+                fromOriginToAim = whereToAim.position - origin.position;//狙う場所と原点の差分ベクトル
+                if (character.isFacingLeft)
+                {
+                    origin.rotation = Quaternion.FromToRotation(Vector2.left, fromOriginToAim);//差分ベクトルから角度を出す。
+                }
+                else
+                {
+                    origin.rotation = Quaternion.FromToRotation(Vector2.right, fromOriginToAim);//差分ベクトルから角度を出す。
 
-            }
+                }
+
+
+
         }
 
         //マウスの位置によってキャラクターの向きを変更する

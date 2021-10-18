@@ -59,6 +59,10 @@
     <Compile Include="Assets\2DSunnyLand\2DSunnyLandScripts\IsGroundChecker.cs" />
     <Compile Include="Assets\2DSunnyLand\2DSunnyLandScripts\itemManager.cs" />
     <Compile Include="Assets\2DSunnyLand\2DSunnyLandScripts\playermanager.cs" />
+    <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\CameraFollow.cs" />
+    <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\GameManager.cs" />
+    <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Managers.cs" />
+    <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\SpecialLevelManager.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Abilities.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Character.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Dash.cs" />

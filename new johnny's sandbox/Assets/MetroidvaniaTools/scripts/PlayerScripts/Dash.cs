@@ -55,6 +55,7 @@ namespace MetroidvaniaTools
             {
                 FallSpeed(0);
                 movement.enabled = false;
+                aimManager.enabled = false;
                 if (!character.isFacingLeft)
                 {
                     DashCollision(Vector2.right,.5f,DashingLayers);
@@ -100,6 +101,7 @@ namespace MetroidvaniaTools
             yield return new WaitForSeconds(DashAmountTime);
             character.isDashing = false;
             movement.enabled = true;
+            aimManager.enabled = true;
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
 

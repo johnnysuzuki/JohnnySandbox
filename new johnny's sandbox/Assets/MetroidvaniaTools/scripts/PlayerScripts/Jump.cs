@@ -24,10 +24,24 @@ namespace MetroidvaniaTools
         protected float MaxFallSpeed;
         [SerializeField]
         protected float AcceptedFallSpeed;
+        [SerializeField]
+        protected float glideTime;
+        [SerializeField]
+        public float glideGravity;//グライド用の倍数
+        [SerializeField]
+        public float gravityForceMultiplier;//重力用の倍数
+
+
+        public static float originglideGravity;　//最初にキャラが持ってるグライド用重力
+        public static float originGravityMultiplier; //最初にキャラが持ってる重力係数
 
         public LayerMask collisionLayer;//何処とぶつかるか
 
+        public static float gravity = -19.6f;//基礎重力
+
         private bool isJumping;//ジャンプ中か否か
+        private float jumpCountDown;
+        private float fallCountDown;
         private int NumberOfJumpsLeft;
         private float JumpCountDown;
 
@@ -36,6 +50,9 @@ namespace MetroidvaniaTools
             base.Initialization();
             NumberOfJumpsLeft = MaxJumpNum;
             JumpCountDown = ButtonHoldTime;
+            fallCountDown = glideTime;
+            originglideGravity = glideGravity;
+            originGravityMultiplier = gravityForceMultiplier;
         }
 
         protected virtual void Update()
@@ -62,6 +79,7 @@ namespace MetroidvaniaTools
                 {
                     JumpCountDown = ButtonHoldTime;
                     isJumping = true;
+                    fallCountDown = glideTime;
                 }
                 return true;
             }
@@ -83,6 +101,13 @@ namespace MetroidvaniaTools
         {
             IsJumping();
             GroundCheck();
+            Gliding();
+            CharacterFalling();
+        }
+
+        protected virtual void CharacterFalling()
+        { 
+            rb.AddForce(Vector2.up * gravity * gravityForceMultiplier);
         }
 
         protected virtual void IsJumping()
@@ -97,6 +122,30 @@ namespace MetroidvaniaTools
             if (rb.velocity.y > MaxJumpSpeed)
             {
                 rb.velocity = new Vector2(rb.velocity.x, MaxJumpSpeed);
+            }
+        }
+
+        protected virtual void Gliding()
+        {
+            if(JumpHeld())
+            {
+                if (glideGravity < 0)
+                {
+                    if (fallCountDown > 0 && rb.velocity.y > AcceptedFallSpeed)
+                    {
+                        FallSpeed(glideGravity);
+                        return;
+                    }
+                }
+
+                else if (Falling(0))
+                {
+                    fallCountDown -= Time.deltaTime;
+                    if (fallCountDown > 0 && rb.velocity.y > AcceptedFallSpeed)
+                    {
+                        FallSpeed(glideGravity);
+                    }
+                }
             }
         }
 
@@ -123,6 +172,7 @@ namespace MetroidvaniaTools
             {
                 character.isGrounded = true;
                 NumberOfJumpsLeft = MaxJumpNum;
+                fallCountDown = glideTime;
             }
             else
             {

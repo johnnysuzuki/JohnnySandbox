@@ -34,9 +34,25 @@ namespace MetroidvaniaTools
                 {
                     if(gameObject.tag == "GrapplingHook")
                     {
-                        transform.parent = GameObject.FindWithTag("Player").transform;
-                        transform.Translate(Vector2.right * weapon.projectileSpeed * Time.deltaTime);
-                        return;
+                        //transform.parent = GameObject.FindWithTag("Player").transform;
+                        if (!left)
+                        {
+                            if (flipped)
+                            {
+                                flipped = false;
+                                transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+                            }
+                            transform.Translate(Vector2.right * weapon.projectileSpeed * Time.deltaTime);
+                        }
+                        else
+                        {
+                            if (!flipped)
+                            {
+                                flipped = true;
+                                transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+                            }
+                            transform.Translate(Vector2.right * -weapon.projectileSpeed * Time.deltaTime);
+                        }
                     }
                     if (!left)
                     {
@@ -59,6 +75,7 @@ namespace MetroidvaniaTools
                 }
                 else
                 {
+                    fired = false;
                     DestroyProjectile();
                 }
             }

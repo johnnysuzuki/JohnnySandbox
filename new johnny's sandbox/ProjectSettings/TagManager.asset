@@ -12,6 +12,9 @@ TagManager:
   - BaseProjectile
   - SecondWeapon
   - GrapplingHook
+  - Water
+  - Updraft
+  - Space
   layers:
   - Default
   - TransparentFX
@@ -26,8 +29,8 @@ TagManager:
   - Platform
   - PassableLayer
   - HookableLayer
-  - 
-  - 
+  - Water
+  - Updraft
   - 
   - 
   - 

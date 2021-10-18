@@ -19,13 +19,12 @@ namespace MetroidvaniaTools
 
         public bool connected;
         public bool removed;
-        public GameObject objectConnectedTo;
+        public Vector2 objectConnectedTo;
         public GameObject hookTrail;
-
-        public bool checking;
 
         public float distanceFromHookedObject;
         public bool canDrawLine;
+        public bool grappling;
 
         protected override void Initialization()
         {
@@ -48,7 +47,6 @@ namespace MetroidvaniaTools
         {
             if(Input.GetButton("Fire1") && weapon.currentProjectile != null && weapon.currentProjectile.GetComponent<Projectile>().fired && weapon.currentProjectile.tag == "GrapplingHook")
             {
-                checking = true;
                 distanceFromHookedObject = Vector2.Distance(weapon.gunBarrel.position, weapon.currentProjectile.transform.position);
                 canDrawLine = true;
                 Invoke("DrawLine", .1f);
@@ -96,20 +94,22 @@ namespace MetroidvaniaTools
         {
             rb.freezeRotation = false;
             float step = hookReelSpeed * Time.deltaTime;
-            aimManager.whereToAim.transform.position = objectConnectedTo.transform.position;
+            grappling = true; //グラップル中はエイム方向を一定に定める
+            aimManager.whereToAim.transform.position = objectConnectedTo;
+            weapon.currentProjectile.transform.position = objectConnectedTo;
             weapon.currentProjectile.GetComponent<Projectile>().projectileLifeTime = weapon.currentWeapon.lifeTime;
-            weapon.currentProjectile.transform.position = objectConnectedTo.transform.position;
-            distanceFromHookedObject = Vector2.Distance(weapon.gunBarrel.position, objectConnectedTo.transform.position);
+            //weapon.currentProjectile.transform.position = objectConnectedTo.transform.position;
+            distanceFromHookedObject = Vector2.Distance(weapon.gunBarrel.position, objectConnectedTo);
+            transform.rotation = Quaternion.FromToRotation(Vector2.up, new Vector3(objectConnectedTo.x,objectConnectedTo.y,0) - transform.position);
 
             if (Input.GetButton("Up") && distanceFromHookedObject >= minHookLength)
             {
-                transform.position = Vector2.MoveTowards(transform.position, objectConnectedTo.transform.position, step);
+                transform.position = Vector2.MoveTowards(transform.position, objectConnectedTo, step);
 
             }
             if (Input.GetButton("Down") && distanceFromHookedObject < hookLength - .5f)
             {
-                transform.position = Vector2.MoveTowards(transform.position, objectConnectedTo.transform.position, -1*step);
-
+                transform.position = Vector2.MoveTowards(transform.position, objectConnectedTo, -1*step);
             }
 
         }
@@ -119,11 +119,11 @@ namespace MetroidvaniaTools
             if (!Input.GetButton("Fire1") || removed)
             {
                 removed = true;
+                grappling = false;
                 if (connected)
                 {
                     connected = false;
-                    objectConnectedTo.GetComponent<HingeJoint2D>().enabled = false;
-                    objectConnectedTo = null;
+                    objectConnectedTo = new Vector2 (0f,0f);
                     rb.AddForce(Vector2.up * verticalForce);
                     if (!character.isFacingLeft)
                     {
@@ -141,7 +141,6 @@ namespace MetroidvaniaTools
                     weapon.currentProjectile.GetComponent<Projectile>().DestroyProjectile();
                 }
                 ReturnHook();
-
             }
         }
 

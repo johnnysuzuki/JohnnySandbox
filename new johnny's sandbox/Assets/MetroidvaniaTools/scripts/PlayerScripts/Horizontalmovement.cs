@@ -15,6 +15,8 @@ namespace MetroidvaniaTools
         protected float SprintMultiplier;
         [SerializeField]
         protected float hookSpeedMultiplier;
+        [SerializeField]
+        protected float a;
         private float acceleration;//加速度
         private float currentSpeed;//現在の速度
         private float horizontalInput;//左右入力
@@ -121,17 +123,23 @@ namespace MetroidvaniaTools
             }
             if (grapplingHook.connected)
             {
-                
-                if(Input.GetButton("Up")|| Input.GetButton("Down") || AroundCollisionCheck() || character.isGrounded )
+
+                if (Input.GetButton("Up") || Input.GetButton("Down") || AroundCollisionCheck() || character.isGrounded || rb.transform.position.y > grapplingHook.objectConnectedTo.y)
                 {
                     return;
                 }
-                currentSpeed *= hookSpeedMultiplier;
-                if(grapplingHook.hookTrail.transform.position.y > grapplingHook.objectConnectedTo.transform.position.y)
+                else
+                {
+                    currentSpeed *= hookSpeedMultiplier;
+                    rb.AddForce(Vector2.up * jump.glideGravity);
+                }
+                /*
+                if(grapplingHook.hookTrail.transform.position.y > grapplingHook.objectConnectedTo.y)
                 {
                     currentSpeed *= -hookSpeedMultiplier;
                 }
-                rb.rotation -= currentSpeed;
+                */
+                //rb.rotation -= currentSpeed;
             }
         }
 

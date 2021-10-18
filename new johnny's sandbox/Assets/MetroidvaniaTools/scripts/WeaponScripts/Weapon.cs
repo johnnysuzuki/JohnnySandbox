@@ -20,6 +20,7 @@ namespace MetroidvaniaTools
         public List<GameObject> totalPools;
 
         public GameObject currentProjectile;
+        public Vector2 currentProjectilePosition;
         public WeaponTypes currentWeapon;
 
         private GameObject projectileParentFolder;

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &762540255050756601
+--- !u!1 &4964566013582610977
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7169699473626384876}
-  - component: {fileID: 2297884219533329860}
-  - component: {fileID: 9084946532788909126}
-  - component: {fileID: 5388914706801340570}
-  - component: {fileID: 7992838095702765166}
+  - component: {fileID: 4964566013582611036}
+  - component: {fileID: 4964566013582611037}
+  - component: {fileID: 4964566013582611038}
+  - component: {fileID: 4964566013582611039}
+  - component: {fileID: 4964566013582610976}
   m_Layer: 0
-  m_Name: SecondProjectile
-  m_TagString: SecondWeapon
+  m_Name: 'SpacePlatform '
+  m_TagString: Space
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &7169699473626384876
+  m_IsActive: 1
+--- !u!4 &4964566013582611036
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762540255050756601}
-  m_LocalRotation: {x: -0, y: -0, z: 0.29944664, w: 0.95411307}
-  m_LocalPosition: {x: -2.5621774, y: 0.7452546, z: 0}
+  m_GameObject: {fileID: 4964566013582610977}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.75, y: 0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2297884219533329860
+--- !u!212 &4964566013582611037
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762540255050756601}
+  m_GameObject: {fileID: 4964566013582610977}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -73,24 +73,24 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b155d6698386f594aa59cb1c6d5d8ba8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 8c586acee671ad3408a39f62e3b8dcf6, type: 3}
+  m_Color: {r: 0.49814722, g: 0.2988163, b: 0.745283, a: 0.09803922}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.4, y: 0.15}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &9084946532788909126
+--- !u!61 &4964566013582611038
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762540255050756601}
+  m_GameObject: {fileID: 4964566013582610977}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -101,24 +101,24 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
-    newSize: {x: 0.4, y: 0.15}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.15}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &5388914706801340570
+--- !u!50 &4964566013582611039
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762540255050756601}
-  m_BodyType: 1
+  m_GameObject: {fileID: 4964566013582610977}
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -130,20 +130,18 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &7992838095702765166
+  m_Constraints: 7
+--- !u!114 &4964566013582610976
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762540255050756601}
+  m_GameObject: {fileID: 4964566013582610977}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b082c95ad69a7e41a7558435b970164, type: 3}
+  m_Script: {fileID: 11500000, guid: f09b71d4afd928c45b6d3ae09be95a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: dacb469d175e021419afc96c95ee2c40, type: 2}
-  fired: 1
-  left: 0
-  projectileLifeTime: 1
+  buoyancyForce: 0
+  updraftForce: 0

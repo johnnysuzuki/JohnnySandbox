@@ -16,8 +16,6 @@ namespace MetroidvaniaTools
         [HideInInspector]
         public bool isWallSliding;
 
-        public static float gravity = -9.81f;
-
         protected Collider2D col;
         protected Rigidbody2D rb;
         protected Horizontalmovement movement;
@@ -26,6 +24,7 @@ namespace MetroidvaniaTools
         protected AimManager aimManager;
         protected Weapon weapon;
         protected GrapplingHook grapplingHook;
+
 
         private Vector2 facingLeft;
 
@@ -37,20 +36,10 @@ namespace MetroidvaniaTools
         }
         private void Update()
         {
-            if(grapplingHook.checking == true)
-            {
-                Debug.Log("cheking");
-                grapplingHook.checking = false;
-                
-            }
-            if(grapplingHook.canDrawLine== true)
-            {
-                Debug.Log("canDrawLine");
-            }
-            if (grapplingHook.distanceFromHookedObject > 0)
-            {
-                Debug.Log(grapplingHook.distanceFromHookedObject);
-            }
+        }
+
+        private void FixedUpdate()
+        {
         }
 
         protected virtual void Initialization()
@@ -127,7 +116,14 @@ namespace MetroidvaniaTools
 
         protected virtual void FallSpeed(float velocity)
         {
-            rb.velocity = new Vector2(rb.velocity.x, velocity);
+            if (velocity >= 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * velocity);
+            }
+            if (velocity < 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x,Mathf.Abs(rb.velocity.y * velocity));
+            }
         }
 
 
