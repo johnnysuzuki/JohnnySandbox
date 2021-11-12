@@ -37,9 +37,8 @@ namespace MetroidvaniaTools
 
         public LayerMask collisionLayer;//何処とぶつかるか
 
-        public static float gravity = -19.6f;//基礎重力
+        public static float gravity = -20f;//基礎重力
 
-        private bool isJumping;//ジャンプ中か否か
         private float jumpCountDown;
         private float fallCountDown;
         private int NumberOfJumpsLeft;
@@ -66,19 +65,19 @@ namespace MetroidvaniaTools
             {
                 if (!character.isGrounded && NumberOfJumpsLeft == MaxJumpNum)
                 {
-                    isJumping = false;
+                    character.isJumping = false;
                     return false;
                 }
-                if(LimitAirJumps && Falling(AcceptedFallSpeed))
+                if(LimitAirJumps && character.Falling(AcceptedFallSpeed))
                 {
-                    isJumping = false;
+                    character.isJumping = false;
                     return false;
                 }
                 NumberOfJumpsLeft--;
                 if (NumberOfJumpsLeft >= 0)
                 {
                     JumpCountDown = ButtonHoldTime;
-                    isJumping = true;
+                    character.isJumping = true;
                     fallCountDown = glideTime;
                 }
                 return true;
@@ -113,7 +112,7 @@ namespace MetroidvaniaTools
         protected virtual void IsJumping()
         {
           
-            if (isJumping)
+            if (character.isJumping)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up*jumpForce) ;
@@ -138,7 +137,7 @@ namespace MetroidvaniaTools
                     }
                 }
 
-                else if (Falling(0))
+                else if (character.Falling(0))
                 {
                     fallCountDown -= Time.deltaTime;
                     if (fallCountDown > 0 && rb.velocity.y > AcceptedFallSpeed)
@@ -157,18 +156,18 @@ namespace MetroidvaniaTools
                 if (JumpCountDown <= 0)
                 {
                     JumpCountDown = 0;
-                    isJumping = false;
+                    character.isJumping = false;
                 }
                 else
                     rb.AddForce(Vector2.up * HoldForce);
             }
             else
-                isJumping = false;
+                character.isJumping = false;
         }
 
         protected virtual void GroundCheck()
         {
-            if (CollisionCheck(Vector2.down, distanceToCollider, collisionLayer)&& !isJumping)
+            if (CollisionCheck(Vector2.down, distanceToCollider, collisionLayer)&& !character.isJumping)
             {
                 character.isGrounded = true;
                 NumberOfJumpsLeft = MaxJumpNum;
@@ -177,7 +176,7 @@ namespace MetroidvaniaTools
             else
             {
                 character.isGrounded = false;
-                if(Falling(0) && rb.velocity.y < MaxFallSpeed)
+                if(character.Falling(0) && rb.velocity.y < MaxFallSpeed)
                 {
                     rb.velocity = new Vector2(rb.velocity.x, MaxFallSpeed);
                 }

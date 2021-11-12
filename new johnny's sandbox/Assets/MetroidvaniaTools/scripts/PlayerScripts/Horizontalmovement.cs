@@ -16,7 +16,7 @@ namespace MetroidvaniaTools
         [SerializeField]
         protected float hookSpeedMultiplier;
         [SerializeField]
-        protected float a;
+        protected Vector2 A;
         private float acceleration;//加速度
         private float currentSpeed;//現在の速度
         private float horizontalInput;//左右入力
@@ -32,6 +32,7 @@ namespace MetroidvaniaTools
         {
             MovementPressed();
             SprintingHeld();
+            A = rb.velocity;
         }
 
         //左右入力を検知してboolを返す

@@ -15,6 +15,8 @@ namespace MetroidvaniaTools
         public bool isDashing;
         [HideInInspector]
         public bool isWallSliding;
+        [HideInInspector]
+        public bool isJumping;//ジャンプ中か否か
 
         protected Collider2D col;
         protected Rigidbody2D rb;
@@ -104,7 +106,7 @@ namespace MetroidvaniaTools
         }
 
 
-        protected virtual bool Falling(float velocity)
+        public virtual bool Falling(float velocity)
         {
             if (!isGrounded && rb.velocity.y < velocity)
             {

@@ -18,6 +18,7 @@ namespace MetroidvaniaTools
 
         private bool canDash;
         private float DashCountDown;
+        private Vector2 deltaPosition;
 
         // Update is called once per frame
         protected virtual void Update()
@@ -38,6 +39,7 @@ namespace MetroidvaniaTools
 
         protected virtual void Dashing()
         {
+            deltaPosition = transform.position;
             DashCountDown = DashCooldownTime;
             character.isDashing = true;
             StartCoroutine(FinishedDashing());
@@ -103,6 +105,15 @@ namespace MetroidvaniaTools
             movement.enabled = true;
             aimManager.enabled = true;
             rb.velocity = new Vector2(0, rb.velocity.y);
+            RaycastHit2D[] hits = new RaycastHit2D[10];
+            yield return new WaitForSeconds(.1f);
+            hits = Physics2D.CapsuleCastAll(new Vector2(col.bounds.center.x, col.bounds.center.y + .05f), new Vector2(col.bounds.size.x, col.bounds.size.y - .1f), CapsuleDirection2D.Vertical, 0, Vector2.zero, 0, jump.collisionLayer);
+            if(hits.Length > 0)
+            {
+                transform.position = deltaPosition;
+            }
+
+
         }
 
         protected virtual IEnumerator TurnColliderBackOn(GameObject obj)

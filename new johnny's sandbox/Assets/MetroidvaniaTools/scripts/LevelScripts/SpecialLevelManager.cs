@@ -8,7 +8,6 @@ namespace MetroidvaniaTools
     public class SpecialLevelManager : Managers
     {
         [SerializeField]
-        [Range(-2f, 0f)]
         private float buoyancyForce ;
         [SerializeField]
         private float updraftForce;
