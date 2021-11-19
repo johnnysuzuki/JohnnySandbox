@@ -63,6 +63,7 @@
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\GameManager.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Managers.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Platform\FallingPlatform.cs" />
+    <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Platform\Ladder.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Platform\OneWayPlatform.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Platform\PlatformManager.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\SpecialLevelManager.cs" />

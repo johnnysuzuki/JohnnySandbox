@@ -42,16 +42,15 @@ namespace MetroidvaniaTools
             {
                 whereToAim.position = weapon.currentProjectile.transform.position;
             }
-                fromOriginToAim = whereToAim.position - origin.position;//狙う場所と原点の差分ベクトル
-                if (character.isFacingLeft)
-                {
-                    origin.rotation = Quaternion.FromToRotation(Vector2.left, fromOriginToAim);//差分ベクトルから角度を出す。
-                }
-                else
-                {
-                    origin.rotation = Quaternion.FromToRotation(Vector2.right, fromOriginToAim);//差分ベクトルから角度を出す。
-
-                }
+            fromOriginToAim = whereToAim.position - origin.position;//狙う場所と原点の差分ベクトル
+ 　　　　　 if (character.isFacingLeft)
+            {
+                origin.rotation = Quaternion.FromToRotation(Vector2.left, fromOriginToAim);//差分ベクトルから角度を出す。
+            }
+            else
+            {
+                origin.rotation = Quaternion.FromToRotation(Vector2.right, fromOriginToAim);//差分ベクトルから角度を出す
+            }
 
 
 

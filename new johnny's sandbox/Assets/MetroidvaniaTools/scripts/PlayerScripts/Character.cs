@@ -19,6 +19,8 @@ namespace MetroidvaniaTools
         public bool isJumping;//ジャンプ中か否か
         [HideInInspector]
         public bool isJumpingThroughPlatform;//ジャンプ中か否か
+        [HideInInspector]
+        public bool isOnLadder;
 
         protected Collider2D col;
         protected Rigidbody2D rb;

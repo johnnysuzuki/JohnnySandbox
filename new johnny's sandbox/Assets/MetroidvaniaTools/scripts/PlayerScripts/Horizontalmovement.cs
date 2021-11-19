@@ -16,7 +16,11 @@ namespace MetroidvaniaTools
         [SerializeField]
         protected float hookSpeedMultiplier;
         [SerializeField]
-        protected Vector2 A;
+        protected float ladderSpeed;
+        [HideInInspector]
+        public GameObject currentLadder;
+
+        protected bool above;
         private float acceleration;//加速度
         private float currentSpeed;//現在の速度
         private float horizontalInput;//左右入力
@@ -32,7 +36,6 @@ namespace MetroidvaniaTools
         {
             MovementPressed();
             SprintingHeld();
-            A = rb.velocity;
         }
 
         //左右入力を検知してboolを返す
@@ -61,6 +64,7 @@ namespace MetroidvaniaTools
         {
             Movement();
             RemoveFromGrapple();
+            LadderMovement();
         }
 
         //移動の処理
@@ -94,6 +98,39 @@ namespace MetroidvaniaTools
                     rb.freezeRotation = true;
                 }
             }
+        }
+
+        protected virtual void LadderMovement()
+        {
+            if(character.isOnLadder && currentLadder != null)
+            {
+                rb.bodyType = RigidbodyType2D.Kinematic;
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+                if(col.bounds.min.y >= (currentLadder.GetComponent<Ladder>().topOfLadder.y - col.bounds.extents.y))
+                {
+                    above = true;
+                }
+                else
+                {
+                    above = false;
+                }
+                if (Input.GetButton("Up"))
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, currentLadder.GetComponent<Ladder>().topOfLadder, ladderSpeed * Time.deltaTime);
+                    return;
+                }
+                if (Input.GetButton("Down"))
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, currentLadder.GetComponent<Ladder>().bottomOfLadder, ladderSpeed * Time.deltaTime);
+                    return;
+                }
+
+            }
+            else
+            {
+                rb.bodyType = RigidbodyType2D.Dynamic;
+            }
+            
         }
 
         //スピードが速くなりすぎないようにする
