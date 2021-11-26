@@ -75,7 +75,7 @@ namespace MetroidvaniaTools
 
         }
 
-        protected virtual bool CollisionCheck(Vector2 direction , float distance, LayerMask collision)
+        public GameObject CollisionCheck(Vector2 direction , float distance, LayerMask collision)
         {
             RaycastHit2D[] hits = new RaycastHit2D[10];
             int numHits = col.Cast(direction, hits, distance);
@@ -84,10 +84,10 @@ namespace MetroidvaniaTools
                 if ((1 << hits[i].collider.gameObject.layer & collision) != 0)
                 {
                     currentPlatform = hits[i].collider.gameObject;
-                    return true;
+                    return currentPlatform;
                 }
             }
-            return false;
+            return null;
         }
 
         protected virtual bool AroundCollisionCheck()

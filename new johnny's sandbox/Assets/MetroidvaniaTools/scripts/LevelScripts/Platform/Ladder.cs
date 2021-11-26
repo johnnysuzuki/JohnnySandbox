@@ -11,6 +11,7 @@ namespace MetroidvaniaTools
         [HideInInspector]
         public Vector3 bottomOfLadder;
         protected Horizontalmovement movement;
+        protected float originalGravity;
 
         protected override void Initialization()
         {

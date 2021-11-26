@@ -20,15 +20,16 @@ namespace MetroidvaniaTools
         [HideInInspector]
         public GameObject currentLadder;
 
-        protected bool above;
         private float acceleration;//加速度
         private float currentSpeed;//現在の速度
         private float horizontalInput;//左右入力
         private float runTime;//走っている時間
+        private float originalGravityForceMultiplier;//最初の重力
 
         protected override void Initialization()
         {
             base.Initialization();//CharacterのInitializationを呼び出してオーバーライド
+            originalGravityForceMultiplier = jump.gravityForceMultiplier;
         }
 
         // Update is called once per frame
@@ -104,31 +105,24 @@ namespace MetroidvaniaTools
         {
             if(character.isOnLadder && currentLadder != null)
             {
-                rb.bodyType = RigidbodyType2D.Kinematic;
+                jump.gravityForceMultiplier = 0;
+                //rb.bodyType = RigidbodyType2D.Kinematic;
                 rb.velocity = new Vector2(rb.velocity.x, 0);
-                if(col.bounds.min.y >= (currentLadder.GetComponent<Ladder>().topOfLadder.y - col.bounds.extents.y))
-                {
-                    above = true;
-                }
-                else
-                {
-                    above = false;
-                }
                 if (Input.GetButton("Up"))
                 {
-                    transform.position = Vector2.MoveTowards(transform.position, currentLadder.GetComponent<Ladder>().topOfLadder, ladderSpeed * Time.deltaTime);
+                    rb.velocity = new Vector2(rb.velocity.x,ladderSpeed);
+                    //transform.position = Vector2.MoveTowards(transform.position, currentLadder.GetComponent<Ladder>().topOfLadder, ladderSpeed * Time.deltaTime);
                     return;
                 }
                 if (Input.GetButton("Down"))
                 {
-                    transform.position = Vector2.MoveTowards(transform.position, currentLadder.GetComponent<Ladder>().bottomOfLadder, ladderSpeed * Time.deltaTime);
-                    return;
+                    rb.velocity = new Vector2(rb.velocity.x, -ladderSpeed);
                 }
-
             }
             else
             {
-                rb.bodyType = RigidbodyType2D.Dynamic;
+                jump.gravityForceMultiplier = originalGravityForceMultiplier;
+                //rb.bodyType = RigidbodyType2D.Dynamic;
             }
             
         }

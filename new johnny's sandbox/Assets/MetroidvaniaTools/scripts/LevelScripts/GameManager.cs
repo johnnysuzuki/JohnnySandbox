@@ -26,5 +26,10 @@ namespace MetroidvaniaTools
         {
 
         }
+
+        protected virtual void DebugLog(string check)
+        {
+            Debug.Log(check);
+        }
     }
 }

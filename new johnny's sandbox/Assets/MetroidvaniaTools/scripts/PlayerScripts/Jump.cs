@@ -171,7 +171,7 @@ namespace MetroidvaniaTools
                 character.isJumping = false;
         }
 
-        protected virtual void GroundCheck()
+        public virtual GameObject GroundCheck()
         {
             if (CollisionCheck(Vector2.down, distanceToCollider, collisionLayer)&& !character.isJumping)
             {
@@ -187,6 +187,7 @@ namespace MetroidvaniaTools
                     rb.velocity = new Vector2(rb.velocity.x, MaxFallSpeed);
                 }
             }
+            return currentPlatform;
         }
 
         protected virtual void NotJumpingThroughPlatform()
