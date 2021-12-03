@@ -12,6 +12,15 @@ namespace MetroidvaniaTools
         public GameObject initialPlayer;
         [HideInInspector]
         public int currentStartReference;
+        [SerializeField]
+        protected GameObject gunFirePoint;
+        [SerializeField]
+        protected CinemachineVirtualCamera virtualCamera;
+        [SerializeField]
+        protected CinemachineConfiner confiner;
+        protected BoxCollider2D boxcol;
+        protected CompositeCollider2D col;
+
 
 
         [SerializeField]
@@ -29,9 +38,17 @@ namespace MetroidvaniaTools
             CreatePlayer(initialPlayer,startingLocation);
         }
 
-        protected virtual void Start()
+        protected override void Initialization()
         {
-            
+            base.Initialization();
+            virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+            confiner = virtualCamera.GetComponent<CinemachineConfiner>();
+            gunFirePoint = GameObject.FindWithTag("GunFirePoint");
+            boxcol = GetComponent<BoxCollider2D>();
+            col = GetComponent<CompositeCollider2D>();
+            boxcol.size = levelSize.size;
+            boxcol.offset = levelSize.center;
+            StartCoroutine("CameraSetting");
         }
 
         protected virtual void OnDisable()
@@ -44,6 +61,20 @@ namespace MetroidvaniaTools
             PlayerPrefs.SetInt("FacingLeft", character.isFacingLeft ? 1 : 0);
             PlayerPrefs.SetInt("SpawnReference", spawnReference);
             SceneManager.LoadScene(scene);
+        }
+
+        IEnumerator CameraSetting()
+        {
+            if(player == null)
+            {
+                yield return null;
+            }
+            else
+            {
+                virtualCamera.Follow = player.transform;
+                virtualCamera.LookAt = gunFirePoint.transform;
+                confiner.m_BoundingShape2D = col;
+            }
         }
 
         protected virtual void OnDrawGizmos()

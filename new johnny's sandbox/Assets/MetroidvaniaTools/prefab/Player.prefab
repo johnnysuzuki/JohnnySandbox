@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1204253566466277750}
   m_Layer: 15
   m_Name: GunFirePoint
-  m_TagString: Untagged
+  m_TagString: GunFirePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204253566466277751}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.43747258, y: -0.034719553, z: -8.224196}
+  m_LocalPosition: {x: 0.43747258, y: -0.034719553, z: 0}
   m_LocalScale: {x: 0.9489646, y: 6.9440923, z: 1}
   m_Children:
   - {fileID: 1204253566919186389}

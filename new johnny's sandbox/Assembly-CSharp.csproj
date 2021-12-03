@@ -53,12 +53,6 @@
     <UnityVersion>2019.4.30f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\2DSunnyLand\2DSunnyLandScripts\EnemyDeathAnimation.cs" />
-    <Compile Include="Assets\2DSunnyLand\2DSunnyLandScripts\EnemyManager.cs" />
-    <Compile Include="Assets\2DSunnyLand\2DSunnyLandScripts\GameManager.cs" />
-    <Compile Include="Assets\2DSunnyLand\2DSunnyLandScripts\IsGroundChecker.cs" />
-    <Compile Include="Assets\2DSunnyLand\2DSunnyLandScripts\itemManager.cs" />
-    <Compile Include="Assets\2DSunnyLand\2DSunnyLandScripts\playermanager.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Managers\CameraFollow.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Managers\GameManager.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Managers\LevelManager.cs" />

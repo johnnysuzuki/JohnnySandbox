@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MetroidvaniaTools 1.unity
+    path: 
     guid: d5ee1a925bc1793499b499d9ff7d198f
   - enabled: 1
     path: Assets/Scenes/MetroidvaniaTools.unity
     guid: 8051c3b4269d37d499b685abb8a1bff4
+  - enabled: 1
+    path: Assets/Scenes/MetroidvaniaTools 1.unity
+    guid: 90703b1c9046ac74da31042e2b4d35e7
   m_configObjects: {}

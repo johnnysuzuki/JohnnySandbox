@@ -19,7 +19,7 @@ namespace MetroidvaniaTools
         protected Character character;
         protected LevelManager levelManager;
         // Start is called before the first frame update
-        void Start()
+        protected virtual void Start()
         {
             Initialization();
 
