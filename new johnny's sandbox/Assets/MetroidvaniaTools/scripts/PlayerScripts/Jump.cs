@@ -110,7 +110,7 @@ namespace MetroidvaniaTools
             CharacterFalling();
         }
 
-        protected virtual void CharacterFalling()
+        public virtual void CharacterFalling()
         { 
             rb.AddForce(Vector2.up * gravity * gravityForceMultiplier);
         }

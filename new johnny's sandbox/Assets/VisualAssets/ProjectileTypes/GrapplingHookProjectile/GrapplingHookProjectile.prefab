@@ -29,8 +29,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270507877878267565}
-  m_LocalRotation: {x: -0, y: -0, z: 0.288026, w: 0.95762265}
-  m_LocalPosition: {x: 4.6744146, y: 1.2570055, z: -8.224196}
+  m_LocalRotation: {x: -0, y: -0, z: -0.5989289, w: 0.8008022}
+  m_LocalPosition: {x: -10.921165, y: -2.8654864, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: b4b82058a5d0f42478c85195fb798ab3, type: 2}
   fired: 1
-  left: 0
+  left: 1
   projectileLifeTime: 1
 --- !u!114 &-8254915567588283994
 MonoBehaviour:

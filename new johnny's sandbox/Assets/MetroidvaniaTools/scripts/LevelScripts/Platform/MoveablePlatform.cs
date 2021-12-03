@@ -96,6 +96,14 @@ namespace MetroidvaniaTools
                                 pingPongGoingDown = false;
                             }
                         }
+                    }
+                    if(platformType == PlatformTypes.Loop)
+                    {
+                        nextPath = i + 1;
+                        if (nextPath == numberOfPaths.Count)
+                        {
+                            nextPath = 0;
+                        }
 
                     }
                     if(platformType == PlatformTypes.StopOnEnd)

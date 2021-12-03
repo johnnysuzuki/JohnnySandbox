@@ -419,8 +419,8 @@ MonoBehaviour:
   yMin: 0
   yMax: 0
   nextScene:
-    sceneAsset: {fileID: 102900000, guid: d5ee1a925bc1793499b499d9ff7d198f, type: 3}
-    scenePath: Assets/Scenes/MetroidvaniaTools 1.unity
+    sceneAsset: {fileID: 102900000, guid: 8051c3b4269d37d499b685abb8a1bff4, type: 3}
+    scenePath: Assets/Scenes/MetroidvaniaTools.unity
   locationReference: 1
 --- !u!61 &446499113
 BoxCollider2D:
@@ -446,7 +446,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3, y: 3}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &446499114
 Transform:
@@ -456,7 +456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 446499111}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.99, y: -2.79, z: -2.68376}
+  m_LocalPosition: {x: 0.67, y: 0.6, z: -2.68376}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -724,7 +724,6 @@ MonoBehaviour:
   currentStartReference: 0
   availableSpawnLocations:
   - {fileID: 1597032065}
-  - {fileID: 701704720}
 --- !u!4 &566401027
 Transform:
   m_ObjectHideFlags: 0
@@ -1057,36 +1056,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!1 &701704719
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 701704720}
-  m_Layer: 0
-  m_Name: PlayerSpawnsLocation (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &701704720
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701704719}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.96, y: -7.67, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1480440347}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &770251895
 GameObject:
   m_ObjectHideFlags: 3
@@ -1777,7 +1746,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1597032065}
-  - {fileID: 701704720}
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2267,11 +2235,6 @@ PrefabInstance:
     - target: {fileID: 1204253567807267208, guid: ac34201deacb0034880067394c25c6aa,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1204253567807267216, guid: ac34201deacb0034880067394c25c6aa,
-        type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1204253567807267217, guid: ac34201deacb0034880067394c25c6aa,

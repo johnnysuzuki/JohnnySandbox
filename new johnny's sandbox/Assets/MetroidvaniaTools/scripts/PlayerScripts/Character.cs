@@ -31,6 +31,8 @@ namespace MetroidvaniaTools
         protected Weapon weapon;
         protected GrapplingHook grapplingHook;
         protected GameObject currentPlatform;
+        protected GameObject player;
+        protected GameManager gameManager;
 
 
         private Vector2 facingLeft;
@@ -60,6 +62,7 @@ namespace MetroidvaniaTools
             weapon = GetComponent<Weapon>();
             facingLeft = new Vector2(-transform.localScale.x,transform.localScale.y);
             grapplingHook = GetComponent<GrapplingHook>();
+            gameManager = FindObjectOfType<GameManager>();
         }
 
         protected virtual void Flip()
@@ -134,6 +137,15 @@ namespace MetroidvaniaTools
             }
         }
 
+        public void InitializePlayer()
+        {
+            player = FindObjectOfType<Character>().gameObject;
+            player.GetComponent<Character>().isFacingLeft = PlayerPrefs.GetInt("FacingLeft") == 1 ? true : false;
+            if (player.GetComponent<Character>().isFacingLeft)
+            {
+                player.transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+            }
+        }
 
     }
 

@@ -20,7 +20,7 @@ namespace MetroidvaniaTools
                     EditorGUI.BeginChangeCheck();
 
                     Vector3 position = platform.numberOfPaths[i];
-                    next = i++; 
+                    next = i+1; 
                     if(next == platform.numberOfPaths.Count)
                     {
                         next = 0;

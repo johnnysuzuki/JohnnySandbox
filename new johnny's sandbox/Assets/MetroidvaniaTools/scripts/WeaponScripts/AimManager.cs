@@ -15,6 +15,7 @@ namespace MetroidvaniaTools
         protected override void Initialization()
         {
             base.Initialization();
+            whereToAim = GameObject.FindGameObjectWithTag("WhereToAim").transform;
         }
         // Update is called once per frame
         protected virtual void Update()
