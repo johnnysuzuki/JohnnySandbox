@@ -50,6 +50,19 @@ namespace MetroidvaniaTools
             initialPlayer.GetComponent<Character>().InitializePlayer();
         }
 
+        protected virtual void CreateAimPoint(GameObject whereToAim)
+        {
+            GameObject[] deleteWhereToAim = GameObject.FindGameObjectsWithTag("WhereToAim");
+            if (deleteWhereToAim.Length > 0)
+            {
+                foreach (GameObject obj in deleteWhereToAim)
+                {
+                    Destroy(obj);
+                }
+            }
+            Instantiate(whereToAim);
+        }
+
         // Update is called once per frame
         void Update()
         {

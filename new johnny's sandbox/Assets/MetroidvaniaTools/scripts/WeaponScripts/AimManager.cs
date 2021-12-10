@@ -5,6 +5,7 @@ namespace MetroidvaniaTools
 {
     public class AimManager : Abilities
     {
+        protected GameObject whereToAimPoint;
         public Transform whereToAim;
         public Transform origin;
         [HideInInspector]
@@ -15,7 +16,7 @@ namespace MetroidvaniaTools
         protected override void Initialization()
         {
             base.Initialization();
-            whereToAim = GameObject.FindGameObjectWithTag("WhereToAim").transform;
+            StartCoroutine("Positioning");
         }
         // Update is called once per frame
         protected virtual void Update()
@@ -52,9 +53,19 @@ namespace MetroidvaniaTools
             {
                 origin.rotation = Quaternion.FromToRotation(Vector2.right, fromOriginToAim);//差分ベクトルから角度を出す
             }
+        }
 
-
-
+        IEnumerator Positioning()
+        {
+            whereToAimPoint = GameObject.FindGameObjectWithTag("WhereToAim");
+            if (whereToAimPoint == null)
+            {
+                yield return null;
+            }
+            else
+            {
+                whereToAim = whereToAimPoint.transform;
+            }
         }
 
         //マウスの位置によってキャラクターの向きを変更する

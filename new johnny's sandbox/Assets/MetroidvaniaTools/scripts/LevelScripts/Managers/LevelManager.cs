@@ -10,6 +10,7 @@ namespace MetroidvaniaTools
     {
         public Bounds levelSize;
         public GameObject initialPlayer;
+        public GameObject aimPosition;
         [HideInInspector]
         public int currentStartReference;
         [SerializeField]
@@ -36,6 +37,7 @@ namespace MetroidvaniaTools
             }
             startingLocation = availableSpawnLocations[currentStartReference].position;
             CreatePlayer(initialPlayer,startingLocation);
+            CreateAimPoint(aimPosition);
         }
 
         protected override void Initialization()
