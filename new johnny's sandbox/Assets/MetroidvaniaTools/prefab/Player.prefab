@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 1204253567807267214}
   - component: {fileID: 1204253567807267217}
   - component: {fileID: 1204253567807267216}
+  - component: {fileID: 1047487684018218294}
   m_Layer: 15
   m_Name: Player
   m_TagString: Player
@@ -616,8 +617,6 @@ MonoBehaviour:
   isJumping: 0
   isJumpingThroughPlatform: 0
   isOnLadder: 0
-  aimPosition: {fileID: 1920551811523655267, guid: 8a479bb3203f00c479b27ead4f0e08e4,
-    type: 3}
   whereToAim: {fileID: 0}
   origin: {fileID: 1204253566563525561}
   mousePosition: {x: 0, y: 0}
@@ -653,3 +652,27 @@ MonoBehaviour:
   distanceFromHookedObject: 0
   canDrawLine: 0
   grappling: 0
+--- !u!114 &1047487684018218294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204253567807267204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad52b3cb9c33d8348a888dfb67b8ef9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFacingLeft: 0
+  isGrounded: 0
+  isDashing: 0
+  isWallSliding: 0
+  isJumping: 0
+  isJumpingThroughPlatform: 0
+  isOnLadder: 0
+  warpTime: 3
+  warpCoolDown: 5
+  backPosition: {x: 0, y: 0}
+  originCharacter: {fileID: 6980414025144522400, guid: 2b94d8ff84e91174bbb99a91cd6451e1,
+    type: 3}

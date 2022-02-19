@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace MetroidvaniaTools
 {
@@ -10,6 +11,7 @@ namespace MetroidvaniaTools
     {
         public Bounds levelSize;
         public GameObject initialPlayer;
+        public Image fadeScreen;
         public GameObject aimPosition;
         [HideInInspector]
         public int currentStartReference;
@@ -21,7 +23,6 @@ namespace MetroidvaniaTools
         protected CinemachineConfiner confiner;
         protected BoxCollider2D boxcol;
         protected CompositeCollider2D col;
-
 
 
         [SerializeField]
@@ -51,6 +52,7 @@ namespace MetroidvaniaTools
             boxcol.size = levelSize.size;
             boxcol.offset = levelSize.center;
             StartCoroutine("CameraSetting");
+            StartCoroutine(FadeIn());
         }
 
         protected virtual void OnDisable()
@@ -62,7 +64,7 @@ namespace MetroidvaniaTools
         {
             PlayerPrefs.SetInt("FacingLeft", character.isFacingLeft ? 1 : 0);
             PlayerPrefs.SetInt("SpawnReference", spawnReference);
-            SceneManager.LoadScene(scene);
+            StartCoroutine(FadeOut(scene));
         }
 
         IEnumerator CameraSetting()
@@ -77,6 +79,47 @@ namespace MetroidvaniaTools
                 virtualCamera.LookAt = gunFirePoint.transform;
                 confiner.m_BoundingShape2D = col;
             }
+        }
+
+        protected virtual IEnumerator FadeIn()
+        {
+            float timeStarted = Time.time;
+            float timeSinceStarted = Time.time - timeStarted;
+            float percentageComplete = timeSinceStarted / .5f;
+            Color currentColor = fadeScreen.color;
+            while (true)
+            {
+                timeSinceStarted = Time.time - timeStarted;
+                percentageComplete = timeSinceStarted / .5f;
+                currentColor.a = Mathf.Lerp(1, 0, percentageComplete);
+                fadeScreen.color = currentColor;
+                if(percentageComplete >= 1)
+                {
+                    break;
+                }
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
+        protected virtual IEnumerator FadeOut(SceneReference scene)
+        {
+            float timeStarted = Time.time;
+            float timeSinceStarted = Time.time - timeStarted;
+            float percentageComplete = timeSinceStarted / .5f;
+            Color currentColor = fadeScreen.color;
+            while (true)
+            {
+                timeSinceStarted = Time.time - timeStarted;
+                percentageComplete = timeSinceStarted / .5f;
+                currentColor.a = Mathf.Lerp(0, 1, percentageComplete);
+                fadeScreen.color = currentColor;
+                if (percentageComplete >= 1)
+                {
+                    break;
+                }
+                yield return new WaitForEndOfFrame();
+            }
+            SceneManager.LoadScene(scene);
         }
 
         protected virtual void OnDrawGizmos()

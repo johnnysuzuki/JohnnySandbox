@@ -17,6 +17,7 @@ TagManager:
   - Space
   - WhereToAim
   - GunFirePoint
+  - BackPosition
   layers:
   - Default
   - TransparentFX

@@ -53,6 +53,9 @@
     <UnityVersion>2019.4.30f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\MetroidvaniaTools\scripts\AIScripts\AIManagers.cs" />
+    <Compile Include="Assets\MetroidvaniaTools\scripts\AIScripts\EnemyCharacter.cs" />
+    <Compile Include="Assets\MetroidvaniaTools\scripts\AIScripts\EnemyMovement.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Managers\CameraFollow.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Managers\Door.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Managers\GameManager.cs" />
@@ -69,6 +72,7 @@
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Platform\PlatformManager.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Abilities.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Character.cs" />
+    <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\ChronoBreak.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Dash.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\GrapplingHook.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Hook.cs" />
