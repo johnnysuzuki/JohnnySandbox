@@ -27,7 +27,11 @@ namespace MetroidvaniaTools
 
         [SerializeField]
         protected List<Transform> availableSpawnLocations = new List<Transform>();
+        [SerializeField]
+        protected List<Transform> playerIndicatorSpawnLocations = new List<Transform>();
         private Vector3 startingLocation;
+        private Vector3 playerIndicatorLocation;
+
 
         protected virtual void Awake()
         {
@@ -37,6 +41,7 @@ namespace MetroidvaniaTools
                 currentStartReference = 0;
             }
             startingLocation = availableSpawnLocations[currentStartReference].position;
+            playerIndicatorLocation = playerIndicatorSpawnLocations[currentStartReference].position;
             CreatePlayer(initialPlayer,startingLocation);
             CreateAimPoint(aimPosition);
         }
@@ -44,6 +49,7 @@ namespace MetroidvaniaTools
         protected override void Initialization()
         {
             base.Initialization();
+            playerIndicator.transform.position = playerIndicatorLocation;
             virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
             confiner = virtualCamera.GetComponent<CinemachineConfiner>();
             gunFirePoint = GameObject.FindWithTag("GunFirePoint");

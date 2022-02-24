@@ -70,6 +70,9 @@
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Platform\OneWayPlatform.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Platform\PathEditor.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\LevelScripts\Platform\PlatformManager.cs" />
+    <Compile Include="Assets\MetroidvaniaTools\scripts\Map\MiniMap.cs" />
+    <Compile Include="Assets\MetroidvaniaTools\scripts\Map\PlayerBlip.cs" />
+    <Compile Include="Assets\MetroidvaniaTools\scripts\Map\WorldMap.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Abilities.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\Character.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\PlayerScripts\ChronoBreak.cs" />
