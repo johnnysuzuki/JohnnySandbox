@@ -86,6 +86,7 @@
     <Compile Include="Assets\MetroidvaniaTools\scripts\WeaponScripts\Projectile.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\WeaponScripts\Weapon.cs" />
     <Compile Include="Assets\MetroidvaniaTools\scripts\WeaponScripts\WeaponTypes.cs" />
+    <Compile Include="Assets\MetroidvaniaTools\scripts\test.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
