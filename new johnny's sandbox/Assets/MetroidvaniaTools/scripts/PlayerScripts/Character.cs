@@ -85,6 +85,7 @@ namespace MetroidvaniaTools
             for (int i = 0; i < numHits; i++)
             {
                 if ((1 << hits[i].collider.gameObject.layer & collision) != 0)
+                    //1（水）,1（地面）,1（敵）,0（当たってない）,0000.....
                 {
                     currentPlatform = hits[i].collider.gameObject;
                     return currentPlatform;

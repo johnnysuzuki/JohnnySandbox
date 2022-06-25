@@ -2695,6 +2695,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1047487684018218294, guid: ac34201deacb0034880067394c25c6aa,
+        type: 3}
+      propertyPath: warpTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1047487684018218294, guid: ac34201deacb0034880067394c25c6aa,
+        type: 3}
+      propertyPath: warpCoolDown
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1204253567807267204, guid: ac34201deacb0034880067394c25c6aa,
         type: 3}
       propertyPath: m_Name
